@@ -1,7 +1,8 @@
 // import React from 'react';
+import Header from '../../../widgets/header/ui/Header';
 
 const Training = () => {
-  return <div></div>;
+  return <Header />;
 };
 
 export default Training;

@@ -10,9 +10,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const dispatch = useDispatch();
 
-  // Проверка авторизации при загрузке приложения
   const { data } = useGetMeQuery(undefined, {
-    // Пропускаем запрос, если нет токена
     skip: !localStorage.getItem('token'),
   });
 
@@ -22,8 +20,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, [data, dispatch]);
 
-  // Если загрузка, можно показать индикатор загрузки
-  // Но здесь опущено для простоты
 
   return <>{children}</>;
 };

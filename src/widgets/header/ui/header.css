@@ -8,6 +8,7 @@
   justify-content: space-between;
   max-width: 1248px;
   margin: 0 auto;
+  height: 80px;
   padding: 18px 0;
 }
 
@@ -86,7 +87,10 @@ button {
   height: 40px;
   border-radius: 50%;
 }
-
+.header__actions{
+  display: flex;
+  align-items: center;
+}
 .avatar-placeholder {
   width: 40px;
   height: 40px;

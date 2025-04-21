@@ -10,7 +10,6 @@ export const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
   const { isAuth } = useSelector((state: RootState) => state.auth);
 
   if (!isAuth) {
-    // Перенаправляем на страницу входа, если пользователь не авторизован
     return <Navigate to="/login" replace />;
   }
 

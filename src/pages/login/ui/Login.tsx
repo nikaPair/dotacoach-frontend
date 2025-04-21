@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from '../../../widgets/header/ui/Header';
 import { useNavigate } from 'react-router-dom';
 import {
   useLoginMutation,
@@ -73,74 +74,77 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
-        <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
+    <>
+    <Header />
+      <div className="login-container">
+        <div className="login-form-container">
+          <h2>{isLogin ? 'Вход' : 'Регистрация'}</h2>
 
-        {error && <div className="error-message">{error}</div>}
+          {error && <div className="error-message">{error}</div>}
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Пароль</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          {!isLogin && (
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="confirmPassword">Подтвердите пароль</label>
+              <label htmlFor="email">Email</label>
               <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-          )}
 
-          <button
-            type="submit"
-            className="submit-button"
-            disabled={isLoginLoading || isRegisterLoading}
-          >
-            {isLogin ? 'Войти' : 'Зарегистрироваться'}
-          </button>
-        </form>
+            <div className="form-group">
+              <label htmlFor="password">Пароль</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-        <div className="auth-alternatives">
-          <p className="toggle-mode" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin
-              ? 'У вас нет аккаунта? Зарегистрируйтесь'
-              : 'Уже зарегистрированы? Войдите'}
-          </p>
+            {!isLogin && (
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Подтвердите пароль</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+            )}
 
-          <div className="separator">
-            <span>или</span>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isLoginLoading || isRegisterLoading}
+            >
+              {isLogin ? 'Войти' : 'Зарегистрироваться'}
+            </button>
+          </form>
+
+          <div className="auth-alternatives">
+            <p className="toggle-mode" onClick={() => setIsLogin(!isLogin)}>
+              {isLogin
+                ? 'У вас нет аккаунта? Зарегистрируйтесь'
+                : 'Уже зарегистрированы? Войдите'}
+            </p>
+
+            <div className="separator">
+              <span>или</span>
+            </div>
+
+            <button className="steam-button" onClick={handleSteamLogin}>
+              Войти через Steam
+            </button>
           </div>
-
-          <button className="steam-button" onClick={handleSteamLogin}>
-            Войти через Steam
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

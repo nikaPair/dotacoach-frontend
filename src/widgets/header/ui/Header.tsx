@@ -35,7 +35,7 @@ const Header = () => {
                 <Link to="/replays">Replays</Link>
               </li>
               <li>
-                <Link to="/comminity">Community</Link>
+                <Link to="/community">Community</Link>
               </li>
             </ul>
           </nav>
@@ -58,15 +58,15 @@ const Header = () => {
                 )}
               </button>
               <div className="header__dropdown-content">
-                <Link to="/profile">Профиль</Link>
-                <button onClick={handleLogout}>Выйти</button>
+                <Link to="/profile">Profile</Link>
+                <button onClick={handleLogout}>Logout</button>
               </div>
             </div>
           </div>
         ) : (
           <div className="header__actions">
             <Link to="/login">
-              <button>Войти</button>
+              <button>Login</button>
             </Link>
           </div>
         )}

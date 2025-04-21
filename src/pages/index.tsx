@@ -14,7 +14,6 @@ export default function AppRouter() {
       <Route path="/login" element={<Login />} />
       <Route path="/auth/steam/callback" element={<SteamCallback />} />
 
-      {/* Защищенные маршруты */}
       <Route
         path="/dashboard"
         element={<ProtectedRoute element={<Dashboard />} />}
@@ -25,6 +24,14 @@ export default function AppRouter() {
       />
       <Route
         path="/profile"
+        element={<ProtectedRoute element={<Profile />} />}
+      />
+      <Route
+        path="/replays"
+        element={<ProtectedRoute element={<Profile />} />}
+      />
+      <Route
+        path="/community"
         element={<ProtectedRoute element={<Profile />} />}
       />
     </Routes>
