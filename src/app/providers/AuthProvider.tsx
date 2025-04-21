@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const dispatch = useDispatch();
 
   // Проверка авторизации при загрузке приложения
-  const { data, isLoading } = useGetMeQuery(undefined, {
+  const { data } = useGetMeQuery(undefined, {
     // Пропускаем запрос, если нет токена
     skip: !localStorage.getItem('token'),
   });
