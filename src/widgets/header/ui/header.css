@@ -1,0 +1,101 @@
+.header {
+  width: 100%;
+  background-color: #1f2937d8;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1248px;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+
+.header__navigation {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.header__navigation > a {
+  display: flex;
+}
+.header__navigation nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+.header__navigation nav ul li a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: #fff;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+/* Добавляю стили для выпадающего меню профиля и аватара */
+.header__profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.header__dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.header__dropdown-content a,
+.header__dropdown-content button {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.header__dropdown-content a:hover,
+.header__dropdown-content button:hover {
+  background-color: #f5f5f5;
+}
+
+.header__profile-dropdown:hover .header__dropdown-content {
+  display: block;
+}
+
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #5c77ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
