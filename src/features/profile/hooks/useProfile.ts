@@ -4,26 +4,26 @@ import {
 } from '../../../shared/api';
 
 export const useProfile = () => {
-  const profileQuery = useGetProfileQuery();
+  const { data: profileData, isLoading: isProfileLoading, error: profileError } = useGetProfileQuery();
+  const steamId = profileData?.user?.steamId;
 
-  const steamId = profileQuery.data?.user?.steamId || '';
-
-  const statsQuery = useGetPlayerStatsQuery(steamId, {
+  const { 
+    data: statsData, 
+    isLoading: isStatsLoading, 
+    error: statsError 
+  } = useGetPlayerStatsQuery(steamId || '', {
     skip: !steamId,
   });
 
   return {
-    user: profileQuery.data?.user,
-    stats: statsQuery.data?.stats,
-    recentMatches: statsQuery.data?.recentMatches || [],
-
-    isLoading: profileQuery.isLoading || (steamId && statsQuery.isLoading),
-    isStatsLoading: statsQuery.isLoading,
-
-    error: profileQuery.error,
-    statsError: statsQuery.error,
-
-    hasStatsData: Boolean(statsQuery.data),
-    hasMatches: Boolean(statsQuery.data?.recentMatches?.length),
+    user: profileData?.user,
+    stats: statsData?.stats,
+    recentMatches: statsData?.recentMatches || [],
+    isLoading: isProfileLoading || (steamId && isStatsLoading),
+    isStatsLoading,
+    error: profileError,
+    statsError,
+    hasStatsData: Boolean(statsData),
+    hasMatches: Boolean(statsData?.recentMatches?.length),
   };
 };

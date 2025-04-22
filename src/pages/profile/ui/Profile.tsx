@@ -1,7 +1,8 @@
-import { useProfile } from '../../../features/profile/hooks/useProfile';
-import { ProfileHeader } from '../../../features/profile/components/ProfileHeader';
-import { PlayerStats } from '../../../features/profile/components/PlayerStats';
-import { MatchHistory } from '../../../features/profile/components/MatchHistory';
+import { useProfile } from '../../../features/profile/hooks';
+import { ProfileHeader, PlayerStats, MatchHistory, HeroStats } from '../../../features/profile/components';
+import { StatusMessage } from '../../../shared/ui/StatusMessage';
+import { motion } from 'framer-motion';
+import { useInView } from '../../../shared/hooks/useInView';
 import './Profile.css';
 
 /**
@@ -20,32 +21,39 @@ const Profile = () => {
     hasStatsData,
   } = useProfile();
 
+  const [statsRef, statsInView] = useInView({ triggerOnce: true });
+  const [heroesRef, heroesInView] = useInView({ triggerOnce: true });
+  const [matchesRef, matchesInView] = useInView({ triggerOnce: true });
+
   // Обработчик для "Загрузить больше"
   const handleLoadMore = () => {
-    // Будущая имплементация загрузки большего количества матчей
-    console.log('Загрузка дополнительных матчей...');
+    // TODO: Implement loading more matches
   };
 
   // Состояние загрузки
   if (isLoading) {
-    return <div className="profile-container loading">Загрузка профиля...</div>;
+    return <StatusMessage type="loading" message="Загрузка профиля..." className="profile-container" />;
   }
 
   // Состояние ошибки
   if (error) {
     return (
-      <div className="profile-container error">
-        Ошибка при загрузке профиля. Пожалуйста, попробуйте позже.
-      </div>
+      <StatusMessage 
+        type="error" 
+        message="Ошибка при загрузке профиля. Пожалуйста, попробуйте позже." 
+        className="profile-container" 
+      />
     );
   }
 
   // Если нет данных пользователя
   if (!user) {
     return (
-      <div className="profile-container not-found">
-        Профиль не найден. Пожалуйста, войдите в систему.
-      </div>
+      <StatusMessage 
+        type="empty" 
+        message="Профиль не найден. Пожалуйста, войдите в систему." 
+        className="profile-container" 
+      />
     );
   }
 
@@ -65,24 +73,47 @@ const Profile = () => {
         {user.steamId && (
           <>
             {isStatsLoading ? (
-              <div className="profile-section loading">
-                Загрузка статистики...
-              </div>
+              <StatusMessage type="loading" message="Загрузка статистики..." className="profile-section" />
             ) : statsError ? (
-              <div className="profile-section error">
-                Ошибка при загрузке статистики
-              </div>
+              <StatusMessage type="error" message="Ошибка при загрузке статистики" className="profile-section" />
             ) : (
               hasStatsData && (
                 <>
-                  {/* Статистика игрока */}
-                  {stats && <PlayerStats stats={stats} />}
-
-                  {/* История матчей */}
-                  <MatchHistory
-                    matches={recentMatches}
-                    onLoadMore={handleLoadMore}
-                  />
+                  {stats && (
+                    <>
+                      <motion.div
+                        ref={statsRef}
+                        initial={{opacity:1 , y: 50 }}
+                        animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 1, y: 50 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <PlayerStats stats={stats} />
+                      </motion.div>
+                      
+                      {stats.topHeroes && stats.topHeroes.length > 0 && (
+                        <motion.div
+                          ref={heroesRef}
+                          initial={{opacity:1 , y: 50 }}
+                          animate={heroesInView ? { opacity: 1, y: 0 } : { opacity: 1, y: 50 }}
+                          transition={{ duration: 0.6, delay: 0.2 }}
+                        >
+                          <HeroStats heroes={stats.topHeroes} />
+                        </motion.div>
+                      )}
+                      
+                      <motion.div
+                        ref={matchesRef}
+                        initial={{opacity:1 , y: 50 }}
+                        animate={matchesInView ? { opacity: 1, y: 0 } : { opacity: 1, y: 50 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                      >
+                        <MatchHistory
+                          matches={recentMatches}
+                          onLoadMore={handleLoadMore}
+                        />
+                      </motion.div>
+                    </>
+                  )}
                 </>
               )
             )}

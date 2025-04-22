@@ -15,6 +15,14 @@ export interface ProfileResponse {
   user: UserProfile;
 }
 
+export interface TopHero {
+  hero_id: number;
+  last_played: number;
+  games: number;
+  win: number;
+  with_games: number;
+}
+
 // Типы данных для статистики игрока
 export interface PlayerStats {
   totalMatches: number;
@@ -22,6 +30,7 @@ export interface PlayerStats {
   losses: number;
   winRate: number;
   mainRoles: string[];
+  topHeroes?: TopHero[];
 }
 
 // Типы данных для матча
@@ -41,6 +50,12 @@ export interface Match {
 export interface PlayerStatsResponse {
   stats: PlayerStats;
   recentMatches: Match[];
+}
+
+export interface HeroData {
+  name: string;
+  img: string;
+  icon: string;
 }
 
 /**
@@ -72,7 +87,12 @@ export const api = createApi({
 
     // Получение статистики игрока
     getPlayerStats: builder.query<PlayerStatsResponse, string>({
-      query: (steamId) => `profile/stats/${steamId}`,
+      query: (/*steamId*/) => `profile/stats/${'58201406'}`,
+    }),
+    
+    // Получение данных о героях
+    getHeroes: builder.query<Record<number, HeroData>, void>({
+      query: () => 'profile/heroes',
     }),
   }),
 });
@@ -82,4 +102,5 @@ export const {
   useGetAnalyticsQuery,
   useGetProfileQuery,
   useGetPlayerStatsQuery,
+  useGetHeroesQuery,
 } = api;

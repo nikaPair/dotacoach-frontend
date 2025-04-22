@@ -1,0 +1,24 @@
+.status-message {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.status-message.loading {
+  background-color: rgba(0, 105, 217, 0.1);
+  color: #0069d9;
+  border: 1px solid rgba(0, 105, 217, 0.2);
+}
+
+.status-message.error {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.status-message.empty {
+  background-color: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+  border: 1px solid rgba(108, 117, 125, 0.2);
+} 
