@@ -38,13 +38,18 @@ export const authApi = api.injectEndpoints({
       }),
     }),
     getMe: builder.query<{ user: AuthResponse['user'] }, void>({
-      query: () => ({
-        url: 'auth/me',
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      }),
+      query: () => {
+        const token = localStorage.getItem('token');
+        return {
+          url: 'auth/me',
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+      // При успешном ответе кэшируем данные
+      keepUnusedDataFor: 300, // Храним данные 5 минут
     }),
   }),
 });

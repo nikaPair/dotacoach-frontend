@@ -21,16 +21,26 @@ export const steamAuthApi = api.injectEndpoints({
 export const { useSteamCallbackMutation } = steamAuthApi;
 
 // Базовый URL API
-const API_URL = 'https://dotacoach-server.onrender.com/api';
+const API_URL = 'http://localhost:5000/api';
 
 // Обработчик сообщений от окна авторизации Steam
 const handleSteamAuthMessage = (event: MessageEvent) => {
+  console.log('Получено сообщение в окне:', event.data);
+
   // Проверяем тип сообщения
   if (event.data.type === 'STEAM_AUTH_SUCCESS') {
     console.log('Получены данные авторизации Steam:', event.data);
 
     // Получаем данные авторизации
     const authData = event.data.data;
+
+    if (!authData || !authData.token) {
+      console.error(
+        'Ошибка при авторизации через Steam: отсутствуют данные аутентификации'
+      );
+      return;
+    }
+
     // Сохраняем токен в localStorage
     localStorage.setItem('token', authData.token);
 

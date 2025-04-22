@@ -1,0 +1,119 @@
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #1e2029;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.loading,
+.error,
+.not-found {
+  padding: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: #bbb;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  margin-right: 30px;
+}
+
+.profile-avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3498db;
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.profile-info h1 {
+  margin: 0 0 10px 0;
+  color: #fff;
+  font-size: 28px;
+}
+
+.steam-info {
+  display: flex;
+  align-items: center;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.steam-info p {
+  margin: 0 15px 0 0;
+}
+
+.steam-profile-link {
+  color: #3498db;
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: rgba(52, 152, 219, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.steam-profile-link:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.profile-details {
+  margin-top: 30px;
+}
+
+.profile-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.profile-section:last-child {
+  border-bottom: none;
+}
+
+.profile-section h2 {
+  color: #3498db;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.profile-section p {
+  color: #ddd;
+  margin: 8px 0;
+}
+
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
